@@ -54,33 +54,38 @@ class ProfileControllers extends Controller
                 $user->name = $request->name;
                 $user->last_name= $request->last_name;
                 $user->phone = $request->phone;
-                // $user->address = $request->address;
+              
                 $user->email = $request->email;
-                if($request->hasfile('cover_image')){
-                    if($user->cover_image && file_exists($user->cover_image)){
-                        $cover_old_image = $user->cover_image;
-                        unlink($cover_old_image);
-                    }
-                    $file = $request->file('cover_image');
-                    $extension = $file->Extension();
-                    $filename = time().'_'.Str::random(10).'.'.$extension;
-                    $path='uploads/profile/';
-                    $file->move($path,$filename);
-                    $user->cover_image = $path.$filename;
+
+
+            if($request->file('cover_image')){
+                        $cover_image = $this->uploadImage(
+                        $request->file('cover_image'),
+                        null,
+                        'uploads/logo',
+                        300,
+                        300,
+                        'logo'
+                    );
+                      $user->cover_image=$cover_image;
+                }
+                    if($request->file('profile_image')){
+                        $profile_image = $this->uploadImage(
+                        $request->file('profile_image'),
+                        null,
+                        'uploads/logo',
+                        300,
+                        300,
+                        'logo'
+                    );
+                     $user->profile_image=$profile_image;
                 }
 
-                if($request->hasfile('profile_image')){
-                    if($user->profile_image && file_exists($user->profile_image)){
-                        $profile_old_image = $user->profile_image;
-                        unlink($profile_old_image);
-                    }
-                    $file = $request->file('profile_image');
-                    $extension = $file->Extension();
-                $filename = time().'_'.Str::random(10).'.'.$extension;
-                $path='uploads/profile/';
-                $file->move($path,$filename);
-                $user->profile_image = $path.$filename;
-                }
+
+
+
+
+
                 $user->save();
                 toastr()->success('Profile Updated Successfully');
                 return redirect()->back();

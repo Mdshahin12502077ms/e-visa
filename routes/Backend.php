@@ -13,6 +13,11 @@ use App\Http\Controllers\Backend\DynamicPageController;
 use App\Http\Controllers\Backend\SmtpController;
 use App\Models\Smtp;
   use App\Http\Controllers\Backend\PackageController;
+  use App\Http\Controllers\Backend\OrderController;
+ use App\Http\Controllers\Backend\VisaInfosController;
+use App\Http\Controllers\Backend\NotificationUserController;
+use App\Http\Controllers\Backend\ChatController;
+
 
 Route::middleware('admin')->group(function () {
 
@@ -94,5 +99,29 @@ Route::middleware('admin')->group(function () {
         Route::post('/package/manage/update','update')->name('package.update');
         Route::post('/package/manage/delete','delete')->name('package.delete');
         Route::post('/package/manage/status','status')->name('package.status');
+    });
+
+    Route::controller(OrderController::class)->group(function(){
+        Route::get('/apply/manage','index')->name('apply.index');
+        Route::get('/apply/get/all','AllApplyData')->name('apply.all.data');
+
+        Route::get('/apply/manage/edit/{id}','edit')->name('visainfo.edit');
+        Route::post('/apply/manage/update/{id}','update')->name('visainfo.update');
+        Route::post('/apply/manage/delete','delete')->name('visainfo.delete');
+        Route::get('/apply/manage/show/{id}','show')->name('visainfo.show');
+        Route::post('/apply/manage/bulkstatus','Bulkstatus')->name('apply.bulk.action');
+        Route::get('reject/apply/data','rejectApplyData')->name('reject.index');
+
+       Route::get('/apply/get/all/reject','AllApplyRejectData')->name('apply.all.data.reject');
+    });
+    Route::controller(NotificationUserController::class)->group(function(){
+       Route::get('/notification/user/show/','userNotification')->name('get.notification');
+    });
+
+    Route::controller(ChatController::class)->group(function(){
+        Route::post('/chat/user/send/','SendMessege')->name('send.messege');
+        Route::get('/chat/{friendId}','chatuser')->name('chat.user');
+        Route::get('messege/notification','getNotification')->name('get.messege.notification');
+        Route::get('/chat/fetch-messages/{conversationId}','chat')->name('chat.user.conversation');
     });
 });

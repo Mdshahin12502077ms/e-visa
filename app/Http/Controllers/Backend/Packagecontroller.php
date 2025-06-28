@@ -14,14 +14,15 @@ class Packagecontroller extends Controller
     }
 
     public function PackageData(){
-          
+
            if(request()->ajax()){
 
             $data = Package::all();
-          
+
             return datatables()->of($data)
             ->addIndexColumn()
            ->addColumn('action', function ($data) {
+               '<div class="d-flex">';
                   $editBtn = '<a href="javascript:void(0)" class="edit btn btn-secondary btn-sm editPackageBtn"
                     data-id="'.$data->id.'"
                     data-title="'.$data->title.'"
@@ -31,6 +32,7 @@ class Packagecontroller extends Controller
                     data-service_fee="'.$data->service_fee.'"
                     data-goverment_fee="'.$data->goverment_fee.'"
                     data-processing_time="'.$data->processing_time.'"
+                    data-travaller="'.$data->travaller.'"
                     data-status="'.$data->status.'">
                     <i class="fa fa-edit"></i>
                     </a>';
@@ -46,7 +48,7 @@ class Packagecontroller extends Controller
                                 <i class="fa fa-times-circle"></i> Deactive
                               </a>';
                     }
-
+                   '</div>';
                     return $editBtn . '  ' . $statusBtn.''.$deleteBtn;
                 })
             ->rawColumns(['action'])
@@ -54,10 +56,10 @@ class Packagecontroller extends Controller
             ->make(true);
         }
     }
-   
+
 
     public function store(Request $request){
-     
+
         $validator = Validator::make($request->all(), [
                   'title' => 'required',
             'validity' => 'required',
@@ -71,9 +73,9 @@ class Packagecontroller extends Controller
                 'status' => 422,
                 'errors' => $validator->messages(),
             ]);
-        } 
+        }
 
-        
+
             $package = new Package();
             $package->title = $request->title;
             $package->validity = $request->validity;
@@ -81,6 +83,7 @@ class Packagecontroller extends Controller
             $package->service_fee = $request->service_fee;
             $package->goverment_fee = $request->goverment_fee;
             $package->processing_time = $request->processing_time;
+            $package->travaller = $request->travaller;
             $package->status = $request->status;
             $package->save();
 
@@ -88,12 +91,12 @@ class Packagecontroller extends Controller
                 'status' => 200,
                 'message' => 'Package Added Successfully',
             ]);
-        
+
 
     }
 
     public function update(Request $request){
-        
+
         $validator = Validator::make($request->all(), [
             'titleedit' => 'required',
             'validityedit' => 'required',
@@ -116,6 +119,7 @@ class Packagecontroller extends Controller
         $package->goverment_fee = $request->goverment_feeedit;
         $package->processing_time = $request->processing_timeedit;
         $package->status = $request->statusedit;
+        $package->travaller = $request->travalleredit;
         $package->save();
 
         return response()->json([
@@ -135,7 +139,7 @@ class Packagecontroller extends Controller
 
     public function delete(Request $request){
         $id = $request->package_id;
-        
+
         Package::where('id', $id)->delete();
         return response()->json([
             'status' => 200,

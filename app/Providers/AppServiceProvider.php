@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use  App\Models\Smtp;
 use App\Models\SystemSettings;
+use App\models\NotificationSend;
 use Config;
 use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
       if($systemsetting){
          view::share('systemsetting',$systemsetting);
       }
+      
+    //   $notification = NotificationSend::with('user')->where('not')->get();
 
 
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('validity');
             $table->integer('maximum_stay_per_entry');
             $table->string('entries_type')->default('single');
+            $table->integer('travaller')->default(1);
             $table->decimal('service_fee', 10, 2);
             $table->decimal('goverment_fee', 10, 2);
             $table->string('processing_time')->nullable();

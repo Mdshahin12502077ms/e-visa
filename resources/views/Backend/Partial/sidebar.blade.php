@@ -74,27 +74,29 @@
                        </li>
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAuth">
-                                <i class="ri-account-circle-line"></i> <span data-key="t-authentication">Authentication</span>
+                                <i class="ri-account-circle-line"></i> <span data-key="t-authentication">Apply Visa Manage</span>
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarAuth">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#sidebarSignIn" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarSignIn" data-key="t-signin"> Sign In
+                                        <a href="{{ route('apply.index') }}" class="nav-link" > New Visa Apply
                                         </a>
-                                        <div class="collapse menu-dropdown" id="sidebarSignIn">
-                                            <ul class="nav nav-sm flex-column">
-                                                <li class="nav-item">
-                                                    <a href="auth-signin-basic.html" class="nav-link" data-key="t-basic"> Basic
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="auth-signin-cover.html" class="nav-link" data-key="t-cover"> Cover
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </li>
-                                  
+                                    <li class="nav-item">
+                                        <a href="{{ route('reject.index') }}" class="nav-link" > Reject Apply Visa
+                                        </a>
+                                    </li>
+
+
+
+{{--  
+                                        <li class="nav-item">
+                                        <a href="{{ route('chat.user') }}" class="nav-link" > chat
+                                        </a>
+                                    </li>  --}}
+
+
+
                                 </ul>
                             </div>
                         </li>

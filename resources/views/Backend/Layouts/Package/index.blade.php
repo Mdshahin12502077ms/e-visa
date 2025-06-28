@@ -88,6 +88,14 @@
                                 </select>
                             </div>
 
+                                   <div class="col-md-6">
+                                <label for="edit-travaller" class="form-label">Travaller
+                                    (person)</label>
+                                <input type="number" name="travaller" id="travaller"
+                                    class="form-control">
+                            </div>
+
+
                             <div class="col-md-6">
                                 <label for="service_fee" class="form-label">Service Fee</label>
                                 <input type="number" name="service_fee" class="form-control" step="0.01">
@@ -152,6 +160,7 @@
                                 <input type="number" name="maximum_stay_per_entryedit" id="edit-maximum_stay_per_entry"
                                     class="form-control">
                             </div>
+
                             <div class="col-md-6">
                                 <label for="edit-entries_type" class="form-label">Entries Type</label>
                                 <select name="entries_typeedit" id="edit-entries_type" class="form-select">
@@ -159,6 +168,19 @@
                                     <option value="multiple">Multiple</option>
                                 </select>
                             </div>
+
+
+
+                                 <div class="col-md-6">
+                                <label for="edit-travaller" class="form-label">Travaller
+                                    (person)</label>
+                                   <input type="number" name="travalleredit" id="travalleredit"
+                                    class="form-control">
+                              </div>
+
+
+
+
                             <div class="col-md-6">
                                 <label for="edit-service_fee" class="form-label">Service Fee</label>
                                 <input type="number" name="service_feeedit" id="edit-service_fee" class="form-control"
@@ -259,7 +281,7 @@
             let goverment_fee = $('input[name="goverment_fee"]').val().trim();
             let processing_time = $('input[name="processing_time"]').val().trim();
             let status = $('select[name="status"]').val();
-
+            let travaller=$('input[name="travaller"]').val();
             $('.text-danger').remove();
 
             let hasError = false;
@@ -281,6 +303,11 @@
                 $('select[name="entries_type"]').after('<span class="text-danger">Please select entry type</span>');
                 hasError = true;
             }
+            if(travaller === '') {
+                $('input[name="travaller"]').after('<span class="text-danger">Please enter travaller</span>');
+                hasError = true;
+            }
+
             if (service_fee === '') {
                 $('input[name="service_fee"]').after('<span class="text-danger">Please enter service fee</span>');
                 hasError = true;
@@ -353,8 +380,10 @@
             $('#edit-service_fee').val($(this).data('service_fee'));
             $('#edit-goverment_fee').val($(this).data('goverment_fee'));
             $('#edit-processing_time').val($(this).data('processing_time'));
+            $('#travalleredit').val($(this).data('travaller'));
             $('#edit-status').val($(this).data('status'));
             $('#editPackageModal').modal('show');
+
         });
 
 
@@ -368,7 +397,7 @@
             let goverment_fee = $('input[name="goverment_feeedit"]').val().trim();
             let processing_time = $('input[name="processing_timeedit"]').val().trim();
             let status = $('select[name="statusedit"]').val();
-
+             let travaller = $('select[name="travalleredit"]').val();
             $('.text-danger').remove();
 
             let hasError = false;
@@ -408,6 +437,10 @@
             }
             if (status === '') {
                 $('select[name="statusedit"]').after('<span class="text-danger">Please select status</span>');
+                hasError = true;
+            }
+            if (travaller === '') {
+                $('select[name="travalleredit"]').after('<span class="text-danger">Please select travaller</span>');
                 hasError = true;
             }
 

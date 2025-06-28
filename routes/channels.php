@@ -6,6 +6,12 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('notification', function () {
-    return true;
+Broadcast::channel('notification{userId}', function ($user,$userId) {
+     return (int) $user->id === (int) $userId;
 });
+
+Broadcast::channel('messege.{conversationId}', function ($user, $conversationId) {
+    [$senderId, $receiverId] = explode('-', $conversationId);
+    return (int) $user->id === (int) $senderId || (int) $user->id === (int) $receiverId;
+});
+

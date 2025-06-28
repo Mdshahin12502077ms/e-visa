@@ -121,6 +121,29 @@ public function store(Request $request)
     }
 }
 
+    public function userAPPlyVisa($id){
+        try{
+            $data = VisaInfos::with('order.package','order')->where('created_by',$id)->get();
+            return response()->json([
+                'status' => 200,
+                'data' => $data,
+            ]);
+        }
+        catch(\Exception $e){
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+
+
+
+
+
+
 }
 
 

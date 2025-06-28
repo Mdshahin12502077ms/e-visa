@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
  use App\Events\NotificationUser;
 class NotificationController extends Controller
 {
-    public function notification(){
-        $message="hello";
-        event(new NotificationUser($message));
-        return  "success";
-    }
+    // public function notification(){
+    //     $message="hello";
+    //     event(new NotificationUser($message));
+    //     return  "success";
+    // }
 }

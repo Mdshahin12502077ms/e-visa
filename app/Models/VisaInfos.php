@@ -31,4 +31,7 @@ class VisaInfos extends Model
     public function order(){
         return $this->hasOne(Order::class,'visa_infos_id','id');
     }
+    public function user(){
+        return $this->belongsTo(User::class,'created_by','id');
+    }
 }

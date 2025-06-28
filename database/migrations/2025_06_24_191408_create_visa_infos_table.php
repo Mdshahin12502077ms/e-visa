@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('dob');
             $table->string('nationality');
-            $table->string('pass_port_number')->unique();
+            $table->string('pass_port_number');
             $table->string('email_address');
             $table->string('phone_number');
 

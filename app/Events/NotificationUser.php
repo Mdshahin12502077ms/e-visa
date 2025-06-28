@@ -18,25 +18,29 @@ class NotificationUser implements ShouldBroadcast
      * Create a new event instance.
      */
     public $message;
-    public function __construct($message)
+    public $title;
+    public $user;
+    public function __construct($message, $title, $user)
     {
+         $this->title = $title;
         $this->message = $message;
+        $this->user = $user;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
+
+
     public function broadcastOn()
     {
-        return new PrivateChannel('notification');
+        return new PrivateChannel('notification'.$this->user);
 
     }
 
     public function broadcastWith(){
+        
         return [
+            'title' => $this->title,
             'message' => $this->message,
+
         ];
     }
 }

@@ -11,13 +11,12 @@ class NotificationUserController extends Controller
 {
     public function userNotification(){
         $notifications =NotificationSend::with('user')->where('notified_to',Auth::user()->id)->get();
-         $count=NotificationSend::where('notified_to',Auth::user()->id)->count();
+        $count=NotificationSend::where('notified_to',Auth::user()->id)->count();
         return response()->json([
             'notification'=>$notifications,
             'count'=>$count,
-           
             'messege'=>'success'
         ]);
-        
+
     }
 }
